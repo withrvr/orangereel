@@ -1,0 +1,10 @@
+{
+  "name": "orangereel",
+  "private": true,
+  "type": "module",
+  "description": "Doom scroll Hacker News like Reels. Plain HTML, CSS and JS.",
+  "scripts": {
+    "test": "node --test",
+    "start": "python3 -m http.server 8080"
+  }
+}

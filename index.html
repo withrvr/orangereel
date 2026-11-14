@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Orangereel: doom scroll Hacker News</title>
+  <meta name="description" content="Doom scroll something useful. Hacker News, one story per screen, like Reels.">
+  <meta name="theme-color" content="#0B0B0C">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="preconnect" href="https://hacker-news.firebaseio.com">
+  <link rel="preconnect" href="https://hn.algolia.com">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="progress" class="progress" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Orangereel home">
+      <span class="brand-mark">▲</span><span class="brand-name">orangereel</span>
+    </a>
+    <nav id="tabs" class="tabs" aria-label="Feeds"></nav>
+  </header>
+
+  <main id="feed" class="feed" aria-live="polite"></main>
+
+  <div class="navbtns" aria-label="Story navigation">
+    <button id="prevBtn" class="navbtn" aria-label="Previous story">
+      <svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg>
+    </button>
+    <button id="nextBtn" class="navbtn" aria-label="Next story">
+      <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+  </div>
+
+  <div id="backdrop" class="backdrop" hidden></div>
+  <aside id="sheet" class="sheet" aria-label="Comments" aria-hidden="true">
+    <div class="sheet-grip" aria-hidden="true"></div>
+    <header class="sheet-head">
+      <div>
+        <div id="sheetTitle" class="sheet-title">Comments</div>
+        <a id="sheetLink" class="sheet-link" target="_blank" rel="noopener">Open on HN</a>
+      </div>
+      <button id="sheetClose" class="icon-btn" aria-label="Close comments">
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </header>
+    <div id="sheetBody" class="sheet-body"></div>
+  </aside>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <template id="cardTpl">
+    <section class="card">
+      <div class="card-inner">
+        <div class="card-body">
+          <div class="meta-top">
+            <span class="rank"></span>
+            <span class="domain"></span>
+          </div>
+          <h2 class="title"><a target="_blank" rel="noopener"></a></h2>
+          <div class="byline"></div>
+          <div class="text"></div>
+          <button class="preview" type="button"></button>
+          <div class="hint">Swipe up for the next story</div>
+        </div>
+        <div class="rail">
+          <button class="rail-btn" data-act="save" aria-label="Save">
+            <svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></svg>
+            <span>Save</span>
+          </button>
+          <button class="rail-btn" data-act="comments" aria-label="Comments">
+            <svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg>
+            <span class="c-count">0</span>
+          </button>
+          <button class="rail-btn" data-act="share" aria-label="Share">
+            <svg viewBox="0 0 24 24"><path d="M12 3v12M7 8l5-5 5 5M5 14v6h14v-6"/></svg>
+            <span>Share</span>
+          </button>
+          <button class="rail-btn" data-act="open" aria-label="Open article">
+            <svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg>
+            <span>Open</span>
+          </button>
+        </div>
+        <div class="burst" aria-hidden="true">▲</div>
+      </div>
+    </section>
+  </template>
+
+  <noscript><p class="noscript">Orangereel needs JavaScript to fetch Hacker News.</p></noscript>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
